@@ -222,7 +222,7 @@ async function downloadFilesAndRun() {
     }
 
     try {
-      await exec(`nohup ${botPath} ${args} >/dev/null 2>&1 &`);
+      await exec(`nohup ${botPath} ${args} > ${FILE_PATH}/bot.log 2>&1 &`);
       console.log(`${botName} is running`);
       await new Promise((resolve) => setTimeout(resolve, 2000));
     } catch (error) {
