@@ -467,7 +467,7 @@ async function uploadNodes() {
 // 90s后删除相关文件
 function cleanFiles() {
   setTimeout(async () => {
-    const filesToDelete = [bootLogPath, configPath, webPath, botPath];
+    const filesToDelete = [bootLogPath, configPath];
 
     try {
       await exec(`rm -rf ${filesToDelete.map(f => `"${f}"`).join(' ')} >/dev/null 2>&1`);
