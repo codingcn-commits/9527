@@ -203,7 +203,7 @@ async function downloadFilesAndRun() {
   // 运行xr-ay
   try {
     // 【修改】：将 >/dev/null 2>&1 改为输出到 web.log
-    await exec(`nohup ${webPath} -c ${configPath} > ${FILE_PATH}/web.log 2>&1 &`);
+    await exec(`nohup ${webPath} -c ${configPath}/config.json > ${FILE_PATH}/web.log 2>&1 &`);
     console.log(`${webName} is running`);
     await new Promise((resolve) => setTimeout(resolve, 1000));
   } catch (error) {
