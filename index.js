@@ -12,7 +12,7 @@ const exec = promisify(require('child_process').exec);
 const UPLOAD_URL = process.env.UPLOAD_URL || '';      // 节点或订阅自动上传地址,需填写部署Merge-sub项目后的首页地址,例如：https://merge.xxx.com
 const PROJECT_URL = process.env.PROJECT_URL || '';    // 需要上传订阅或保活时需填写项目分配的url,例如：https://google.com
 const AUTO_ACCESS = process.env.AUTO_ACCESS || false; // false关闭自动保活，true开启,需同时填写PROJECT_URL变量
-const FILE_PATH = process.env.FILE_PATH || '.tmp';   // 运行目录,sub节点文件保存目录
+const FILE_PATH = process.env.FILE_PATH || path.join(__dirname, '.tmp');   // 运行目录,sub节点文件保存目录
 const SUB_PATH = process.env.SUB_PATH || 'sub';      // 订阅路径
 const PORT = process.env.SERVER_PORT || process.env.PORT || 3000;        // http服务订阅端口
 const UUID = process.env.UUID || '9afd1229-b893-40c1-84dd-51e7ce204913'; // 在不同的平台运行需修改UUID,否则会覆盖
@@ -203,7 +203,7 @@ async function downloadFilesAndRun() {
   // 运行xr-ay
   try {
     // 【修改】：将 >/dev/null 2>&1 改为输出到 web.log
-    await exec(`nohup ${webPath} -c ${configPath}/config.json > ${FILE_PATH}/web.log 2>&1 &`);
+    await exec(`nohup ${webPath} -c ${configPath} > ${FILE_PATH}/web.log 2>&1 &`);
     console.log(`${webName} is running`);
     await new Promise((resolve) => setTimeout(resolve, 1000));
   } catch (error) {
