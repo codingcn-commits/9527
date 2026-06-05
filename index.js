@@ -214,11 +214,11 @@ async function downloadFilesAndRun() {
     let args;
 
     if (ARGO_AUTH.match(/^[A-Z0-9a-z=]{120,250}$/)) {
-      args = `tunnel --edge-ip-version auto --no-autoupdate --protocol http2 run --token ${ARGO_AUTH}`;
+      args = `tunnel --edge-ip-version auto --no-autoupdate run --token ${ARGO_AUTH}`;
     } else if (ARGO_AUTH.match(/TunnelSecret/)) {
       args = `tunnel --edge-ip-version auto --config ${FILE_PATH}/tunnel.yml run`;
     } else {
-      args = `tunnel --edge-ip-version auto --no-autoupdate --protocol http2 --logfile ${bootLogPath} --loglevel info --url http://localhost:${ARGO_PORT}`;
+      args = `tunnel --edge-ip-version auto --no-autoupdate --logfile ${bootLogPath} --loglevel info --url http://localhost:${ARGO_PORT}`;
     }
 
     try {
@@ -409,7 +409,7 @@ async function extractDomains() {
       }
 
       await new Promise((resolve) => setTimeout(resolve, 3000));
-      const args = `tunnel --edge-ip-version auto --no-autoupdate --protocol http2 --logfile ${bootLogPath} --loglevel info --url http://localhost:${ARGO_PORT}`;
+      const args = `tunnel --edge-ip-version auto --no-autoupdate --logfile ${bootLogPath} --loglevel info --url http://localhost:${ARGO_PORT}`;
       try {
         await exec(`nohup ${botPath} ${args} >/dev/null 2>&1 &`);
         console.log(`${botName} is running`);
